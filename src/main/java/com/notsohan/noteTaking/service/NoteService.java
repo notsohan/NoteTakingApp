@@ -2,21 +2,17 @@ package com.notsohan.noteTaking.service;
 
 import com.notsohan.noteTaking.model.NoteRepository;
 import com.notsohan.noteTaking.model.NoteTaker;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class NoteService {
     private final NoteRepository noteRepository;
 
-    @Autowired
-    public NoteService(NoteRepository noteRepository){
-        this.noteRepository = noteRepository;
-    }
     public NoteTaker saveNote(NoteTaker note) {
         return noteRepository.save(note);
     }
