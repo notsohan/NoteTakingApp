@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class NoteService {
@@ -25,5 +27,27 @@ public class NoteService {
 
     public List<NoteTaker> getNotes() {
         return noteRepository.findAll();
+    }
+
+    public NoteTaker updateNote(Long id, NoteTaker note) {
+        NoteTaker nt = noteRepository.findById(id).get();
+
+        if(Objects.nonNull(note.getTitle()) &&
+                !"".equalsIgnoreCase(note.getTitle())){
+            nt.setTitle(note.getTitle());
+        }
+        if(Objects.nonNull(note.getNote()) &&
+                !"".equalsIgnoreCase(note.getNote())){
+            nt.setNote(note.getNote());
+        }
+        return noteRepository.save(nt);
+    }
+
+    public void deleteNote(Long uid) {
+        noteRepository.deleteById(uid);
+    }
+
+    public String getCount() {
+        return "The amount of Notes are: "+noteRepository.count();
     }
 }

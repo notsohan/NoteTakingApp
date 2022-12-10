@@ -32,4 +32,19 @@ public class NoteController {
     public List<NoteTaker> getNotes(){
         return noteService.getNotes();
     }
+    @PutMapping("update/{id}")
+    public NoteTaker updateNote(@PathVariable("id") Long id,
+                                @RequestBody NoteTaker note){
+        return noteService.updateNote(id, note);
+    }
+
+    @DeleteMapping("delete/{id}")
+    public void deleteNote(@PathVariable("id") Long uid){
+        noteService.deleteNote(uid);
+    }
+
+    @GetMapping("count")
+    public String getCount(){
+        return noteService.getCount();
+    }
 }
